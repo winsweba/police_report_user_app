@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "918393822737",
+    "project_id": "report-app-e889d",
+    "storage_bucket": "report-app-e889d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:918393822737:android:9d7a9b91361c2efae01bb0",
+        "android_client_info": {
+          "package_name": "com.example.police_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "918393822737-ik86vavhbsrrtp9s0phbfrao9rj0njee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiR2XhheDlah6MVu9VUBisYVVK4kC1t4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "918393822737-ik86vavhbsrrtp9s0phbfrao9rj0njee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
