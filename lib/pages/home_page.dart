@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
@@ -240,10 +241,10 @@ class _HomePageState extends State<HomePage> {
     final lat = '${currentPosition?.latitude.toString()}';
     final long = '${currentPosition?.longitude.toString()}';
 
-    final reporterName = _reporterNameController.value.text.trim();
-    final reporterNumber = _reporterNumberController.value.text.trim();
-    final message = _messageController.value.text.trim();
-    final reportersLocation = _reportersLocationController.value.text.trim();
+    String reporterName = _reporterNameController.value.text.trim();
+    String reporterNumber = _reporterNumberController.value.text.trim();
+    String message = _messageController.value.text.trim();
+    String reportersLocation = _reportersLocationController.value.text.trim();
 
     setState(() {
       _loadingData = true;
@@ -270,12 +271,31 @@ class _HomePageState extends State<HomePage> {
         reporterName: reporterName,
         reporterPhone: reporterNumber,
       );
+      Fluttertoast.showToast(
+          msg: "Report Sent Successfully ",
+          // msg: "${e.toString().replaceRange(0, 14, '').split(']')[1]}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0);
     } catch (e) {
-      print('EEEEOOORRRR $e');
+      
+      Fluttertoast.showToast(
+          msg: "Please check Your internet connection ",
+          // msg: "${e.toString().replaceRange(0, 14, '').split(']')[1]}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
     }
 
     setState(() {
       _loadingData = false;
+      _pickFile = null;
     });
   }
 
@@ -338,7 +358,11 @@ class _HomePageState extends State<HomePage> {
                     width: 25,
                   ),
                   ElevatedButton(
-                    style: TextButton.styleFrom(
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30.0, vertical: 10.0),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
                       foregroundColor: Colors.white,
                     ),
                     child: const Text(
@@ -386,7 +410,11 @@ class _HomePageState extends State<HomePage> {
                     width: 10,
                   ),
                   ElevatedButton(
-                    style: TextButton.styleFrom(
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30.0, vertical: 10.0),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
                       foregroundColor: Colors.white,
                     ),
                     child: const Text(
@@ -529,7 +557,11 @@ class _HomePageState extends State<HomePage> {
                 height: 8,
               ),
               ElevatedButton(
-                style: TextButton.styleFrom(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 30.0, vertical: 10.0),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(13.0)),
                   foregroundColor: Colors.white,
                 ),
                 child: _loadLocation
@@ -548,7 +580,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   _determinePosition();
 
-                  print('bbbbbbbbb ${currentPosition?.latitude.toString()}');
+                  // print('bbbbbbbbb ${currentPosition?.latitude.toString()}');
                   _determinePosition().then((value) {
                     lat = '${value.latitude}';
                     long = '${value.longitude}';
@@ -560,22 +592,26 @@ class _HomePageState extends State<HomePage> {
               _loadLocation
                   ? Container()
                   : ElevatedButton(
-                      style: TextButton.styleFrom(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30.0, vertical: 10.0),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0)),
                         foregroundColor: Colors.white,
                       ),
-                      child:_loadingData
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2,
-                        ),
-                      )
-                    : const Text(
-                        'Send',
-                        style: TextStyle(fontSize: 20.0),
-                      ),
+                      child: _loadingData
+                          ? const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : const Text(
+                              'Send',
+                              style: TextStyle(fontSize: 20.0),
+                            ),
                       onPressed: () {
                         upLoadDataToDatabase();
                       },

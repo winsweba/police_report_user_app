@@ -43,40 +43,5 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBHqmE47boxk8sh8430w26_F6c-Gvy5q4A',
-    appId: '1:918393822737:web:19ddf726165a0aaae01bb0',
-    messagingSenderId: '918393822737',
-    projectId: 'report-app-e889d',
-    authDomain: 'report-app-e889d.firebaseapp.com',
-    storageBucket: 'report-app-e889d.appspot.com',
-  );
-
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAiR2XhheDlah6MVu9VUBisYVVK4kC1t4I',
-    appId: '1:918393822737:android:9d7a9b91361c2efae01bb0',
-    messagingSenderId: '918393822737',
-    projectId: 'report-app-e889d',
-    storageBucket: 'report-app-e889d.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDy-IOMwW8v3AWfxAVnjke-iWArH9GuwGQ',
-    appId: '1:918393822737:ios:f7f8fc324f0b7897e01bb0',
-    messagingSenderId: '918393822737',
-    projectId: 'report-app-e889d',
-    storageBucket: 'report-app-e889d.appspot.com',
-    iosClientId: '918393822737-654ntc7u9eaujsta9f6fentdacbi3h5b.apps.googleusercontent.com',
-    iosBundleId: 'com.example.policeApp',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDy-IOMwW8v3AWfxAVnjke-iWArH9GuwGQ',
-    appId: '1:918393822737:ios:f7f8fc324f0b7897e01bb0',
-    messagingSenderId: '918393822737',
-    projectId: 'report-app-e889d',
-    storageBucket: 'report-app-e889d.appspot.com',
-    iosClientId: '918393822737-654ntc7u9eaujsta9f6fentdacbi3h5b.apps.googleusercontent.com',
-    iosBundleId: 'com.example.policeApp',
-  );
+  
 }

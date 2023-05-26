@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:police_app/Auth.dart';
 
 import 'register_page.dart';
@@ -43,7 +44,15 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.of(context)
           .pushNamedAndRemoveUntil("/home_page/", (route) => false);
     } catch (e) {
-      print("$e");
+      print("XXXXXXXXXXXXXXXXXXXXXXXX$e");
+      Fluttertoast.showToast(
+          msg: "${e.toString().replaceRange(0, 14, '').split(']')[1]}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
     }
 
     setState(() {
@@ -51,8 +60,7 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-
-   @override
+  @override
   void dispose() {
     // TODO: implement dispose
     _emailController.dispose();
@@ -63,6 +71,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 2, 28, 73),
       appBar: AppBar(
         title: const Text("Login Now"),
       ),
@@ -78,12 +87,13 @@ class _LoginPageState extends State<LoginPage> {
                 height: 250,
                 width: 250,
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(width: 8),
-                    borderRadius: BorderRadius.circular(12),
-                    image: const DecorationImage(
-                        image: AssetImage('assets/police01.jpg'),
-                        fit: BoxFit.fill)),
+                  // color: Colors.white,
+                  // border: Border.all(width: 8),
+                  borderRadius: BorderRadius.circular(12),
+                  image: const DecorationImage(
+                      image: AssetImage('assets/police01.jpg'),
+                      fit: BoxFit.fill),
+                ),
               ),
               const SizedBox(
                 height: 8,
@@ -104,8 +114,22 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
-                        decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 3,
+                              ), //<-- SEE HERE
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: const OutlineInputBorder(),
                             hintText: "Enter Email"),
                       ),
                     ),
@@ -121,7 +145,21 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         controller: _passwordController,
                         obscureText: true,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 3,
+                              ), //<-- SEE HERE
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
                             border: OutlineInputBorder(),
                             hintText: "Enter Password"),
                       ),
@@ -129,30 +167,28 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
               ),
-              Container(
-                height: 40,
-                width: 100,
-                color: Colors.blue,
-                margin: const EdgeInsets.all(25),
-                child: ElevatedButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                  ),
-                  child: _loading
-                      ? const SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 2,
-                          ),
-                        )
-                      : Text(
-                          _isLogin ? "Login " : 'SignUp',
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                  onPressed: () => handleSubmit(),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 30.0, vertical: 10.0),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0)),
+                  foregroundColor: Colors.white,
                 ),
+                child: _loading
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : Text(
+                        "Login ",
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                onPressed: () => handleSubmit(),
               ),
               Container(
                 margin: const EdgeInsets.all(25),

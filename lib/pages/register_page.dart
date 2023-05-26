@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:police_app/Auth.dart';
 
 import 'login_page.dart';
@@ -66,8 +67,25 @@ class _RegisterPageState extends State<RegisterPage> {
         Navigator.of(context)
             .pushNamedAndRemoveUntil("/home_page/", (route) => false);
       } catch (e) {
-        print("$e");
+        // print("xxxxxxx${e}");
+        Fluttertoast.showToast(
+            msg: "${e.toString().replaceRange(0, 14, '').split(']')[1]}",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
       }
+    } else {
+      Fluttertoast.showToast(
+          msg: "Password do not match",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
     }
 
     setState(() {
@@ -111,6 +129,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 2, 28, 73),
       appBar: AppBar(
         title: const Text("Register Now"),
       ),
@@ -127,7 +146,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 width: 250,
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    border: Border.all(width: 8),
+                    // border: Border.all(width: 8),
                     borderRadius: BorderRadius.circular(12),
                     image: const DecorationImage(
                         image: AssetImage('assets/police01.jpg'),
@@ -153,7 +172,21 @@ class _RegisterPageState extends State<RegisterPage> {
                           }
                           return null;
                         },
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 3,
+                              ), //<-- SEE HERE
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
                             border: OutlineInputBorder(),
                             hintText: "Enter Full Name"),
                       ),
@@ -172,7 +205,21 @@ class _RegisterPageState extends State<RegisterPage> {
                           return null;
                         },
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 3,
+                              ), //<-- SEE HERE
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
                             border: OutlineInputBorder(),
                             hintText: "Enter Phone number"),
                       ),
@@ -189,7 +236,21 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 3,
+                              ), //<-- SEE HERE
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
                             border: OutlineInputBorder(),
                             hintText: "Enter Email"),
                       ),
@@ -206,7 +267,21 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                         controller: _passwordController,
                         obscureText: true,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 3,
+                              ), //<-- SEE HERE
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
                             border: OutlineInputBorder(),
                             hintText: "Enter Password"),
                       ),
@@ -223,7 +298,21 @@ class _RegisterPageState extends State<RegisterPage> {
                           return null;
                         },
                         obscureText: true,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 3,
+                              ), //<-- SEE HERE
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 3,
+                              ),
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
                             border: OutlineInputBorder(),
                             hintText: "Enter Password again"),
                       ),
@@ -231,30 +320,28 @@ class _RegisterPageState extends State<RegisterPage> {
                   ],
                 ),
               ),
-              Container(
-                height: 40,
-                width: 100,
-                color: Colors.blue,
-                margin: const EdgeInsets.all(25),
-                child: ElevatedButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                  ),
-                  child: _loading
-                      ? const SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 2,
-                          ),
-                        )
-                      : const Text(
-                          'SignUp',
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                  onPressed: () => handleSubmit(),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 30.0, vertical: 10.0),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0)),
+                  foregroundColor: Colors.white,
                 ),
+                child: _loading
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : const Text(
+                        'SignUp',
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                onPressed: () => handleSubmit(),
               ),
               Container(
                 margin: const EdgeInsets.all(25),
@@ -287,8 +374,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 }
-
-
 
 Future<void> userSetup(String name, String phoneNumber) async {
   CollectionReference users = FirebaseFirestore.instance.collection('Users');
