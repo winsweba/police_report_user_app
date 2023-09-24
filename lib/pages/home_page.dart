@@ -11,6 +11,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
+import 'Drawer.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -225,7 +227,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _launchUrl() async {
-    final Uri _url = Uri(scheme: 'tel', path: "0241012217");
+    final Uri _url = Uri(scheme: 'tel', path: "0280000000");
     if (await canLaunchUrl(_url)) {
       await launchUrl(_url);
     } else {
@@ -281,7 +283,6 @@ class _HomePageState extends State<HomePage> {
           textColor: Colors.white,
           fontSize: 16.0);
     } catch (e) {
-      
       Fluttertoast.showToast(
           msg: "Please check Your internet connection ",
           // msg: "${e.toString().replaceRange(0, 14, '').split(']')[1]}",
@@ -304,14 +305,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home Page"),
-        leading: IconButton(
-          icon: const Icon(Icons.phone, size: 30.0),
-          onPressed: () {
-            print("Print");
-            _launchUrl();
-          },
-        ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.phone, color: Colors.white, size: 30.0),
+            onPressed: () {
+              _launchUrl();
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.logout, color: Colors.white, size: 30.0),
             onPressed: () {
@@ -321,6 +321,9 @@ class _HomePageState extends State<HomePage> {
             },
           ),
         ],
+      ),
+      drawer: Drawer(
+        child: MyDrawer(),
       ),
       body: SingleChildScrollView(
         child: Center(
